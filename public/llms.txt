@@ -1,0 +1,25 @@
+# GnWebAgency
+
+GnWebAgency is a specialized web agency based in Naples, Italy, focusing on creating professional, modern, and minimalist websites for small businesses, professionals, and SMEs.
+
+## Services
+- Modern Web Design & Development (React, Next.js)
+- Local & National SEO Optimization (Italy)
+- Maintenance & Updates
+- E-commerce Solutions (Shopify, WooCommerce)
+- Copywriting & Content Creation
+
+## Key Information
+- Location: Naples, Italy (Service area: Nationwide)
+- Starting Price: €299
+- Founder: Gianluca Napoletano
+- Website: https://gnwebagency.com
+- Contact: gnwebagency@gmail.com
+
+## Key Pages
+- [Home](https://gnwebagency.com)
+- [Services](https://gnwebagency.com/#servizi)
+- [FAQ](https://gnwebagency.com/faq)
+- [Contact](https://gnwebagency.com/#contatti)
+- [Privacy Policy](https://gnwebagency.com/privacy)
+- [Cookie Policy](https://gnwebagency.com/cookies)
