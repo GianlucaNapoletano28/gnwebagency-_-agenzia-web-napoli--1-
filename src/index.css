@@ -7,43 +7,53 @@
 }
 
 @theme {
-  --color-background: #000000;
-  --color-foreground: #ffffff;
-  
-  --color-card: #080808;
-  --color-card-foreground: #ffffff;
-  
-  --color-popover: #080808;
-  --color-popover-foreground: #ffffff;
-  
-  --color-primary: #00ff88;
-  --color-primary-foreground: #000000;
-  
-  --color-secondary: #1a1a1a;
-  --color-secondary-foreground: #ffffff;
-  
-  --color-muted: #1a1a1a;
-  --color-muted-foreground: #a1a1a1;
-  
-  --color-accent: #00ff88;
-  --color-accent-foreground: #000000;
-  
-  --color-destructive: #ff4444;
-  --color-destructive-foreground: #ffffff;
-  
-  --color-border: #262626;
-  --color-input: #262626;
-  --color-ring: #00ff88;
-  
+  /* Neapolitan Editorial Modernism — palette da design/stitch_gn_web_agency_portfolio */
+  --color-background: #0B0B0C;
+  --color-foreground: #F2F1EC;
+
+  --color-card: #121214;
+  --color-card-foreground: #F2F1EC;
+
+  --color-popover: #121214;
+  --color-popover-foreground: #F2F1EC;
+
+  --color-primary: #F2F1EC;
+  --color-primary-foreground: #0B0B0C;
+
+  --color-secondary: #1A1A1E;
+  --color-secondary-foreground: #F2F1EC;
+
+  --color-muted: #1A1A1E;
+  --color-muted-foreground: #8E8D8A;
+
+  --color-accent: #00E37A;
+  --color-accent-foreground: #0B0B0C;
+
+  --color-destructive: #93000A;
+  --color-destructive-foreground: #FFB4AB;
+
+  --color-border: #222226;
+  --color-input: #1A1A1E;
+  --color-ring: #00E37A;
+
   --radius-lg: 0.75rem;
   --radius-md: 0.5rem;
   --radius-sm: 0.25rem;
 
-  --color-accent-glow: rgba(0, 255, 136, 0.5);
+  /* Scala superfici aggiuntiva (card editoriali, mockup browser, pannelli) */
+  --color-surface-container-lowest: #0E0E0F;
+  --color-surface-container-low: #121214;
+  --color-surface-container: #1A1A1E;
+  --color-surface-container-high: #222226;
+  --color-surface-container-highest: #2A2A30;
+  --color-subdued: #555558;
+
+  --color-accent-glow: rgba(0, 227, 122, 0.4);
   --color-glass: rgba(255, 255, 255, 0.03);
   --color-glass-border: rgba(255, 255, 255, 0.1);
-  
+
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
@@ -81,4 +91,10 @@
 
 .animate-float {
   animation: float 4s ease-in-out infinite;
+}
+
+/* hide Spline "Built with Spline" watermark */
+a[href*="spline.design"],
+a[href*="app.spline.design"] {
+  display: none !important;
 }
