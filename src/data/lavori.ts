@@ -4,9 +4,9 @@
 // non devono mai mostrare testo segnaposto tipo "TODO".
 
 export interface LavoroMetrica {
-  /** Es. "Accessibilità", "LCP mobile" */
+  /** Es. "Accessibilità" */
   label: string;
-  /** Es. "97/100", "1.7s" */
+  /** Es. "97/100" */
   value: string;
 }
 
@@ -40,7 +40,7 @@ export interface Lavoro {
   servizi: string[];
   url: string;
   immagine: string;
-  /** Dati tecnici misurati (Lighthouse mobile, FCP/LCP). Assente finché non misurati. */
+  /** Accessibilità misurata (Lighthouse mobile). Nessuna metrica di performance/business. */
   metriche?: LavoroMetrica[];
   /** true solo quando esiste davvero /lavori/:slug (S5). Finché manca, la card porta al sito esterno. */
   hasCaseStudy?: boolean;
@@ -58,10 +58,7 @@ export const LAVORI: Lavoro[] = [
     servizi: ["Design", "Sviluppo", "SEO locale", "Form richiesta intervento"],
     url: "https://condass.it/",
     immagine: "/works/condass.webp",
-    metriche: [
-      { label: "Accessibilità", value: "100/100" },
-      { label: "LCP mobile", value: "3.1s" },
-    ],
+    metriche: [{ label: "Accessibilità", value: "100/100" }],
   },
   {
     slug: "terrazza-partenopea",
@@ -73,10 +70,7 @@ export const LAVORI: Lavoro[] = [
     servizi: ["Design", "Sviluppo"],
     url: "https://terrazzapartenopea.it/",
     immagine: "/works/terrazza-partenopea.webp",
-    metriche: [
-      { label: "Accessibilità", value: "96/100" },
-      { label: "LCP mobile", value: "2.1s" },
-    ],
+    metriche: [{ label: "Accessibilità", value: "96/100" }],
   },
   {
     slug: "bb-napule",
@@ -85,13 +79,10 @@ export const LAVORI: Lavoro[] = [
     settore: "B&B · Napoli",
     citta: "Napoli",
     anno: 2026,
-    servizi: ["Design", "Sviluppo"],
+    servizi: ["Brand Identity", "Design", "Sviluppo"],
     url: "https://bebnapule.it/",
     immagine: "/works/bb-napule.webp",
-    metriche: [
-      { label: "Accessibilità", value: "100/100" },
-      { label: "LCP mobile", value: "1.7s" },
-    ],
+    metriche: [{ label: "Accessibilità", value: "100/100" }],
   },
   {
     slug: "di-franco-company",
@@ -100,12 +91,9 @@ export const LAVORI: Lavoro[] = [
     settore: "Beauty tech · Napoli",
     citta: "Napoli",
     anno: 2025,
-    servizi: ["Design", "Sviluppo"],
+    servizi: ["Design", "Sviluppo", "Animazioni 3D"],
     url: "https://difrancocompany.it/",
     immagine: "/works/di-franco-company.webp",
-    metriche: [
-      { label: "Accessibilità", value: "95/100" },
-      { label: "LCP mobile", value: "4.1s" },
-    ],
+    metriche: [{ label: "Accessibilità", value: "95/100" }],
   },
 ];

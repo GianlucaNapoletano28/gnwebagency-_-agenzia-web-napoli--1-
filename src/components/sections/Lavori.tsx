@@ -64,13 +64,13 @@ export const Lavori = () => {
                 </div>
 
                 {lavoro.metriche && lavoro.metriche.length > 0 && (
-                  <div className="grid grid-cols-2 gap-4 rounded-lg bg-surface-container p-4">
+                  <div className="flex flex-wrap gap-6 rounded-lg bg-surface-container p-4">
                     {lavoro.metriche.map((metrica) => (
                       <div key={metrica.label} className="flex flex-col gap-0.5">
                         <span className="font-mono text-[10px] uppercase text-muted-foreground">
                           {metrica.label}
                         </span>
-                        <span className="font-display text-lg text-foreground">{metrica.value}</span>
+                        <span className="font-display text-lg text-accent">{metrica.value}</span>
                       </div>
                     ))}
                   </div>
