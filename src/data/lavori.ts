@@ -10,9 +10,17 @@ export interface LavoroMetrica {
   value: string;
 }
 
-export interface LavoroPaletteColore {
+export interface LavoroTono {
   nome: string;
   hex: string;
+  /** Es. "sfondo principale", "accento primario" */
+  ruolo: string;
+}
+
+export interface LavoroPaletteScala {
+  /** Nome della scala, es. "Oro" */
+  nome: string;
+  toni: LavoroTono[];
 }
 
 export interface LavoroTestimonial {
@@ -21,12 +29,19 @@ export interface LavoroTestimonial {
   ruolo?: string;
 }
 
+export interface LavoroDesignSystem {
+  /** Colori base del sito, uno swatch ciascuno (es. Avorio, Crema, Quasi-nero). */
+  base: LavoroTono[];
+  /** Scale di colore (es. Oro in 5 toni), mostrate come striscia unica, non swatch separati. */
+  scale?: LavoroPaletteScala[];
+  fontDisplay?: string;
+  fontBody?: string;
+}
+
 export interface LavoroCaseStudy {
   sfida?: string;
   approccio?: string;
-  palette?: LavoroPaletteColore[];
-  fontDisplay?: string;
-  fontBody?: string;
+  designSystem?: LavoroDesignSystem;
   testimonial?: LavoroTestimonial;
 }
 
@@ -71,6 +86,32 @@ export const LAVORI: Lavoro[] = [
     url: "https://terrazzapartenopea.it/",
     immagine: "/works/terrazza-partenopea.webp",
     metriche: [{ label: "Accessibilità", value: "96/100" }],
+    hasCaseStudy: true,
+    caseStudy: {
+      // Sfida e approccio: testi da ricevere, blocchi nascosti finché assenti.
+      designSystem: {
+        // Estratti dagli stili calcolati di terrazzapartenopea.it (non dal mockup Stitch).
+        base: [
+          { nome: "Avorio", hex: "#FDFCF8", ruolo: "Sfondo principale" },
+          { nome: "Crema", hex: "#F7F2EA", ruolo: "Sfondo secondario" },
+          { nome: "Quasi-nero", hex: "#1A1A1A", ruolo: "Testo principale" },
+        ],
+        scale: [
+          {
+            nome: "Oro",
+            toni: [
+              { nome: "Oro — testo chiaro", hex: "#E8C98A", ruolo: "Testo su sfondo scuro" },
+              { nome: "Oro chiaro", hex: "#D9B870", ruolo: "Hover / variante chiara" },
+              { nome: "Oro", hex: "#C9A96E", ruolo: "Accento primario (CTA)" },
+              { nome: "Oro scuro", hex: "#B8954A", ruolo: "Variante scura" },
+              { nome: "Oro — testo scuro", hex: "#9B7A38", ruolo: "Testo su sfondo chiaro" },
+            ],
+          },
+        ],
+        fontDisplay: "Cormorant Garamond",
+        fontBody: "Plus Jakarta Sans",
+      },
+    },
   },
   {
     slug: "bb-napule",

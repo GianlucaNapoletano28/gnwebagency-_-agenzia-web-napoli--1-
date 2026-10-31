@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { Home } from "@/src/pages/Home";
+import { CaseStudio } from "@/src/pages/CaseStudio";
 import { PrivacyPolicy } from "@/src/pages/PrivacyPolicy";
 import { CookiePolicy } from "@/src/pages/CookiePolicy";
 import { FAQ } from "@/src/pages/FAQ";
@@ -37,6 +38,7 @@ export default function App() {
         <main className="min-h-screen bg-black text-white selection:bg-[#00ff88]/30 selection:text-white scroll-smooth flex flex-col font-sans relative overflow-x-hidden">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/lavori/:slug" element={<CaseStudio />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/cookies" element={<CookiePolicy />} />
             <Route path="/faq" element={<FAQ />} />
