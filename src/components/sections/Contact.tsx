@@ -1,120 +1,215 @@
-import { motion } from "motion/react";
-import { MessageCircle } from "lucide-react";
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { MessageCircle } from "lucide-react";
+import { AVAILABILITY, CONTACT_EMAIL, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/constants";
+
+const TIPI_PROGETTO = ["Nuovo sito", "Restyling", "E-commerce", "Social", "Consulenza"] as const;
+const TEMPISTICHE = ["Il prima possibile", "Entro 1-2 mesi", "Più avanti"] as const;
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
     nome: "",
-    cognome: "",
-    descrizione: ""
+    attivita: "",
+    tipoProgetto: TIPI_PROGETTO[0] as string,
+    tempistica: TEMPISTICHE[0] as string,
+    messaggio: "",
   });
 
-  const handleWhatsApp = () => {
-    const text = `Ciao GNWEBAGENCY, sono ${formData.nome} ${formData.cognome}. %0A%0A${formData.descrizione}`;
-    window.open(`https://wa.me/393887397246?text=${text}`, '_blank');
+  const isAvailable = AVAILABILITY.status === "disponibile";
+
+  const buildMessage = () => {
+    const righe = [
+      `Ciao Gianluca, sono ${formData.nome || "..."}${formData.attivita ? ` di ${formData.attivita}` : ""}.`,
+      `Tipo di progetto: ${formData.tipoProgetto}`,
+      `Quando vorrei partire: ${formData.tempistica}`,
+    ];
+    if (formData.messaggio) righe.push("", formData.messaggio);
+    return righe.join("\n");
+  };
+
+  const mailtoHref = () => {
+    const subject = encodeURIComponent(`Richiesta progetto — ${formData.nome || "nuovo sito"}`);
+    const body = encodeURIComponent(buildMessage());
+    return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   return (
-    <section id="contatti" className="relative bg-black overflow-hidden py-20">
-      <ContainerScroll
-        titleComponent={
-          <>
-            <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              QUANTO COSTA UN <br />
-              <span className="text-[#00ff88] mt-1 text-5xl md:text-8xl">
-                SITO WEB A NAPOLI?
-              </span>
-            </h2>
-            <p className="text-gray-400 font-mono text-[10px] uppercase tracking-[0.3em] mb-12">Richiedi un preventivo gratuito per la tua attività</p>
-          </>
-        }
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center h-full p-4 md:p-8">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h3 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-                PRONTO A <br />
-                <span className="text-[#00ff88]">INIZIARE?</span>
-              </h3>
-              <p className="text-gray-400 text-sm md:text-base font-light mb-8 max-w-md">
-                Stiamo offrendo un numero limitato di versioni Beta gratuite per aziende selezionate a Napoli e in Italia.
+    <section id="contatti" className="w-full bg-surface-container-lowest px-6 py-20 md:px-12 md:py-28">
+      <div className="mx-auto flex max-w-7xl flex-col gap-14">
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-xs text-accent">06</span>
+          <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+            Iniziamo a collaborare
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          {/* Colonna sinistra */}
+          <div className="flex flex-col gap-8 lg:col-span-5">
+            <div className="flex flex-col gap-4">
+              <h2 className="font-display text-3xl normal-case leading-tight tracking-tight text-foreground md:text-5xl">
+                Hai un progetto in mente?
+                <br />
+                <span className="font-normal italic text-muted-foreground">Parliamone subito.</span>
+              </h2>
+              <p className="font-sans text-base leading-relaxed text-muted-foreground">
+                Rispondo personalmente a ogni richiesta: niente commerciali, niente passaggi di mano.
               </p>
-              
-              <div className="space-y-4">
-                <div className="flex flex-col space-y-1">
-                  <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">EMAIL</span>
-                  <span className="text-white">gnwebagency@gmail.com</span>
-                </div>
-                <div className="flex flex-col space-y-1">
-                  <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">RISPOSTA RAPIDA</span>
-                  <span className="text-[#00ff88] tracking-widest uppercase text-sm">~15 minuti</span>
-                </div>
+            </div>
+
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-surface-container-low px-4 py-2">
+              <span className="relative flex h-2 w-2">
+                {isAvailable && (
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                )}
+                <span className={`relative inline-flex h-2 w-2 rounded-full ${isAvailable ? "bg-accent" : "bg-subdued"}`} />
+              </span>
+              <span className="font-mono text-[11px] uppercase tracking-wider text-foreground">
+                {AVAILABILITY.label}
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-4 rounded-xl bg-surface-container p-6">
+              <div className="flex flex-col gap-1">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  WhatsApp
+                </span>
+                <span className="font-mono text-sm text-foreground">{WHATSAPP_DISPLAY}</span>
               </div>
-            </motion.div>
+              <div className="flex flex-col gap-1">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  Email
+                </span>
+                <span className="font-mono text-sm text-foreground">{CONTACT_EMAIL}</span>
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-4 md:space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="nome" className="text-[10px] uppercase tracking-widest text-gray-500">NOME</Label>
-                <Input 
-                  id="nome" 
-                  placeholder="Nome" 
-                  className="bg-white/5 border-white/10 text-white rounded-none focus:border-[#00ff88]/50 transition-colors h-10 md:h-12"
+          {/* Form */}
+          <div className="flex flex-col gap-5 rounded-2xl bg-surface-container p-6 shadow-2xl lg:col-span-7 md:p-10">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="cf-nome" className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  Nome
+                </label>
+                <input
+                  id="cf-nome"
+                  type="text"
+                  placeholder="Il tuo nome"
+                  className="rounded-lg bg-surface-container-lowest px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-accent"
                   value={formData.nome}
                   onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="cognome" className="text-[10px] uppercase tracking-widest text-gray-500">COGNOME</Label>
-                <Input 
-                  id="cognome" 
-                  placeholder="Cognome" 
-                  className="bg-white/5 border-white/10 text-white rounded-none focus:border-[#00ff88]/50 transition-colors h-10 md:h-12"
-                  value={formData.cognome}
-                  onChange={(e) => setFormData({ ...formData, cognome: e.target.value })}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="cf-attivita" className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  Attività (nome e settore)
+                </label>
+                <input
+                  id="cf-attivita"
+                  type="text"
+                  placeholder="Es. Bar Mediterraneo, ristorazione"
+                  className="rounded-lg bg-surface-container-lowest px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-accent"
+                  value={formData.attivita}
+                  onChange={(e) => setFormData({ ...formData, attivita: e.target.value })}
                 />
               </div>
             </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="descrizione" className="text-[10px] uppercase tracking-widest text-gray-500">LA TUA DOMANDA</Label>
-              <Textarea 
-                id="descrizione" 
-                placeholder="Come possiamo aiutarti?" 
-                className="bg-white/5 border-white/10 text-white rounded-none focus:border-[#00ff88]/50 transition-colors min-h-[80px] md:min-h-[120px] resize-none"
-                value={formData.descrizione}
-                onChange={(e) => setFormData({ ...formData, descrizione: e.target.value })}
+
+            <div className="flex flex-col gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                Tipo di progetto
+              </span>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {TIPI_PROGETTO.map((tipo) => (
+                  <label
+                    key={tipo}
+                    className="flex cursor-pointer items-center gap-2 rounded-lg bg-surface-container-lowest p-3 text-foreground transition-colors hover:bg-surface-container-high"
+                  >
+                    <input
+                      type="radio"
+                      name="tipoProgetto"
+                      value={tipo}
+                      checked={formData.tipoProgetto === tipo}
+                      onChange={() => setFormData({ ...formData, tipoProgetto: tipo })}
+                      className="accent-accent"
+                    />
+                    <span className="font-mono text-[11px]">{tipo}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                Quando vorresti partire?
+              </span>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                {TEMPISTICHE.map((tempo) => (
+                  <label
+                    key={tempo}
+                    className="flex cursor-pointer items-center gap-2 rounded-lg bg-surface-container-lowest p-3 text-foreground transition-colors hover:bg-surface-container-high"
+                  >
+                    <input
+                      type="radio"
+                      name="tempistica"
+                      value={tempo}
+                      checked={formData.tempistica === tempo}
+                      onChange={() => setFormData({ ...formData, tempistica: tempo })}
+                      className="accent-accent"
+                    />
+                    <span className="font-mono text-[11px]">{tempo}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="cf-msg" className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                Messaggio
+              </label>
+              <textarea
+                id="cf-msg"
+                rows={4}
+                placeholder="Raccontami in breve la tua idea o la situazione attuale del tuo sito."
+                className="resize-none rounded-lg bg-surface-container-lowest p-4 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-accent"
+                value={formData.messaggio}
+                onChange={(e) => setFormData({ ...formData, messaggio: e.target.value })}
               />
             </div>
 
-            <Button 
-              className="w-full bg-[#00ff88] text-black hover:bg-[#00ff88]/90 py-4 md:py-6 rounded-none font-bold uppercase tracking-widest text-xs transition-all group"
-              onClick={handleWhatsApp}
-            >
-              <MessageCircle className="mr-2 w-4 h-4 group-hover:scale-110 transition-transform" />
-              INVIA SU WHATSAPP
-            </Button>
+            <div className="flex flex-col gap-3 pt-2">
+              <a
+                href={whatsappLink(buildMessage())}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-4 font-mono text-[11px] uppercase tracking-wider font-semibold text-accent-foreground transition-colors hover:bg-accent/90"
+              >
+                <MessageCircle className="h-4 w-4 transition-transform group-hover:scale-110" />
+                Invia su WhatsApp
+              </a>
+              <p className="text-center font-mono text-[11px] text-muted-foreground">
+                Ti rispondo personalmente, di solito in giornata.
+              </p>
+              <a
+                href={mailtoHref()}
+                className="text-center font-mono text-[11px] text-muted-foreground underline-offset-2 transition-colors hover:text-foreground hover:underline"
+              >
+                Preferisci l'email? Scrivi a {CONTACT_EMAIL}
+              </a>
+            </div>
+
+            <p className="font-mono text-[10px] text-subdued">
+              Questo modulo non invia dati a nessun server: apre solo WhatsApp o la tua app email. Leggi
+              la{" "}
+              <Link to="/privacy" className="underline-offset-2 hover:text-foreground hover:underline">
+                Privacy Policy
+              </Link>
+              .
+            </p>
           </div>
         </div>
-
-        {/* Decorative accent glow */}
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#00ff88]/10 blur-[60px] rounded-full pointer-events-none" />
-      </ContainerScroll>
-
-      {/* Background patterns */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-[#00ff88]/5 blur-[120px] rounded-full pointer-events-none" />
+      </div>
     </section>
   );
 };
-
-
