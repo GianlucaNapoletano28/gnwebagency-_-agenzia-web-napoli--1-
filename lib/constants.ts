@@ -10,3 +10,16 @@ export function whatsappLink(message: string) {
 
 export const CONTACT_EMAIL = "gnwebagency@gmail.com";
 export const BRAND_NAME = "GN Web Agency";
+
+export const SOCIAL_LINKS = {
+  instagram: "https://www.instagram.com/gnwebagency?igsh=MXFmZGx4OGR1Ynlpag==",
+  tiktok: "https://www.tiktok.com/@gn.web.agency?_r=1&_t=ZN-96M6rMKa5l0",
+  facebook: "https://www.facebook.com/share/1ZCuCDWs8K/?mibextid=wwXIfr",
+};
+
+// Pannello unico per la pill di disponibilità (Navbar, Hero). Nessuna data
+// hardcoded nei componenti: aggiornare solo qui.
+export const AVAILABILITY: { status: "disponibile" | "occupato"; label: string } = {
+  status: "disponibile",
+  label: "Disponibile ora",
+};
