@@ -12,6 +12,7 @@ import { PrivacyPolicy } from "@/src/pages/PrivacyPolicy";
 import { CookiePolicy } from "@/src/pages/CookiePolicy";
 import { FAQ } from "@/src/pages/FAQ";
 import { LavoriLab } from "@/src/pages/lab/LavoriLab";
+import { HeroLab } from "@/src/pages/lab/HeroLab";
 import { CookieBanner } from "@/src/components/ui/CookieBanner";
 import { SocialSidebar } from "@/src/components/ui/SocialSidebar";
 
@@ -43,6 +44,7 @@ export default function App() {
             <Route path="/cookies" element={<CookiePolicy />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/lab/lavori" element={<LavoriLab />} />
+            <Route path="/lab/hero" element={<HeroLab />} />
           </Routes>
           <SocialSidebar />
           <CookieBanner />
