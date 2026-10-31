@@ -78,10 +78,55 @@ disegna e sviluppa siti su misura, un cliente alla volta.
 - **S7** — Form Contatti riscritto (Nome, Attività, Tipo progetto,
   Tempistica, Messaggio) → WhatsApp + email precompilati; rimossi "Beta
   gratuita"/"Quanto costa"; `ContainerScroll` rimosso (non più usato).
+- **Hero parallax (fuori sequenza, tra S7 e S8)** — `components/ui/
+  parallax-scrolling.tsx`: riscrittura del componente Osmo "ParallaxComponent"
+  (gsap ScrollTrigger + Lenis), integrata in cima alla Home sotto la Navbar,
+  sopra la Hero esistente (H1 invariato, resta lei il titolo vero della
+  pagina). Stessa scena delle 3 immagini originali (montagna di notte,
+  scaricate in `public/hero/layer-{1,2,4}.webp` da cdn.21st.dev — layer 1
+  foto intera, layer 2 solo montagna e layer 4 solo sagoma persona, questi
+  ultimi due con alpha) e stessi valori di parallax (yPercent 70/55/40/10).
+  Scelte tecniche:
+  - pacchetto `lenis` (non il deprecato `@studio-freight/lenis`);
+  - **pinning via `ScrollTrigger`'s `pin: true`**, non `position: sticky`:
+    `<main>` in `App.tsx` ha `overflow-x-hidden`, che per spec CSS forza
+    anche `overflow-y` a un valore diverso da `visible` sugli antenati e
+    rompe `position: sticky` per qualunque discendente — non solo per
+    questo componente. `pin: true` non ha questo problema e gestisce da
+    solo lo spazio di scroll (`end: "+=150%"`), quindi non serve un wrapper
+    alto artificialmente;
+  - cleanup con `gsap.context()` + `ctx.revert()` (non
+    `ScrollTrigger.getAll().forEach(kill)`, che spegnerebbe anche altri
+    ScrollTrigger eventualmente presenti altrove) + rimozione esplicita del
+    ticker gsap;
+  - Lenis vive solo quanto il componente è montato (quindi solo sulla Home,
+    mai su `/lab/lavori`) e intercetta i click sui link-ancora della pagina
+    (Navbar, Footer, CTA "#lavori"…) per scorrere con `lenis.scrollTo`
+    invece del salto nativo, con offset pari all'altezza della Navbar fissa;
+  - `prefers-reduced-motion`: niente Lenis, niente ScrollTrigger/pin, layer
+    statici (stesso pattern già usato in `/lab/hero`, vedi sotto).
+  - Peso bundle aggiunto: +138 kB JS / +52 kB gzip (gsap+ScrollTrigger+lenis),
+    CSS invariato. Non è stato fatto code-splitting per route.
+  - **Non verificato a 375px**: la finestra Chrome in questo ambiente non
+    scende sotto ~800px di larghezza (limite dell'automazione browser, non
+    del codice) — il CSS usa solo `h-svh`/`object-cover`/percentuali, nessun
+    valore fisso che possa causare overflow, ma serve una verifica reale su
+    device/DevTools da parte di Gianluca.
+  - Prova precedente (`/lab/hero`, route noindex fuori menu, +15 kB JS/+4,6
+    kB gzip) resta a parte: non tocca la Hero reale, usa `motion` invece di
+    gsap/Lenis e layer propri (screenshot dei lavori, non le montagne);
+    nessuna relazione di codice con questo step.
 
 ## Step rimanenti
 
-### S8 — Pulizia testi e SEO
+### S8 — Pulizia testi e SEO (proposta fatta in chat, non ancora applicata)
+
+Proposta dettagliata già condivisa con Gianluca (FAQ domanda per domanda,
+title/meta/og vecchio→nuovo, naming "GN Web Agency" ovunque, nessun H2
+SEO-spam residuo trovato). In attesa del suo OK prima di scrivere codice —
+tre punti aperti: stack tecnologico reale da scrivere in FAQ,
+e-commerce/copywriting come servizi reali sì/no, e se togliere
+`priceRange` dallo schema.org della Home. Checklist originale:
 
 - FAQ (`src/pages/FAQ.tsx`) senza alcun riferimento ai prezzi (oggi "da
   €299", pacchetti, rateizzazione), riscritta in prima persona singolare.

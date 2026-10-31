@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/src/components/sections/Navbar";
+import { ParallaxScrolling } from "@/components/ui/parallax-scrolling";
 import { Hero } from "@/src/components/sections/Hero";
 import { Lavori } from "@/src/components/sections/Lavori";
 import { Metodo } from "@/src/components/sections/Metodo";
@@ -95,6 +96,7 @@ export const Home = () => {
         </script>
       </Helmet>
       <Navbar />
+      <ParallaxScrolling />
       <Hero />
       <Lavori />
       <Metodo />
