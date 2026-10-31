@@ -1,94 +1,111 @@
 import { motion } from "motion/react";
-import { FallingPattern } from "@/components/ui/falling-pattern";
-import { GLSLHills } from "@/components/ui/glsl-hills";
-import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { AVAILABILITY, whatsappLink } from "@/lib/constants";
 
 export const Hero = () => {
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contatti');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const isAvailable = AVAILABILITY.status === "disponibile";
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Background Layer 1: Falling Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <FallingPattern 
-          className="h-screen [mask-image:radial-gradient(ellipse_at_center,transparent,black)]"
-          color="#00ff88" 
-          backgroundColor="#000000" 
-          duration={150} 
-          blurIntensity="0.8rem" 
-          density={1.5} 
-        />
-      </div>
-
-      {/* Background Layer 2: GLSL Hills */}
-      <div className="absolute inset-0 opacity-60">
-        <GLSLHills color="#00ff88" speed={0.3} />
-      </div>
-
-      <div className="container relative z-10 mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-8"
-        >
-          <div className="inline-flex items-center space-x-2 glass px-3 py-1 rounded-full border-accent/20 mb-4 animate-float">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-accent">Napoli, Italia</span>
+    <section className="relative w-full overflow-hidden bg-background px-6 pt-32 pb-20 md:px-12 md:pt-40 md:pb-28">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 md:gap-14">
+        {/* Eyebrow / status bar */}
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs text-accent">01</span>
+            <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              Studio mono-cliente — Napoli
+            </span>
           </div>
-
-          <h1 className="text-6xl md:text-8xl font-bold leading-tight tracking-tighter text-white font-mono">
-            <span className="sr-only">Web Agency Napoli: Creazione Siti Web Professionali | </span>
-            FORGIAMO <br />
-            <span className="text-accent drop-shadow-[0_0_15px_rgba(0,255,136,0.4)]">FUTURI DIGITALI</span>
-          </h1>
-
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 font-light leading-relaxed">
-            Creiamo siti web moderni e minimalisti per aziende italiane <br className="hidden md:block" />
-            che vogliono essere trovate online e distinguersi dal rumore.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
-            <Button 
-              size="lg" 
-              className="group bg-accent text-black hover:bg-accent/90 px-8 py-6 text-xs uppercase tracking-[0.2em] font-bold rounded-sm transition-all duration-300 shadow-[0_0_30px_rgba(0,255,136,0.3)] hover:scale-105"
-              onClick={scrollToContact}
-            >
-              Richiedi Beta Gratuita
-              <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            
-            <a 
-              href="#servizi" 
-              className="text-xs uppercase tracking-[0.3em] font-mono hover:text-accent transition-colors"
-            >
-              I nostri servizi
-            </a>
+          <div className="inline-flex items-center gap-2 self-start rounded-full bg-surface-container-low px-4 py-2 md:self-auto">
+            <span className="relative flex h-2 w-2">
+              {isAvailable && (
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              )}
+              <span className={`relative inline-flex h-2 w-2 rounded-full ${isAvailable ? "bg-accent" : "bg-subdued"}`} />
+            </span>
+            <span className="font-mono text-[11px] text-foreground">{AVAILABILITY.label}</span>
           </div>
-        </motion.div>
+        </div>
+
+        {/* Hero typography + capacity panel */}
+        <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="flex flex-col gap-6 lg:col-span-8"
+          >
+            <h1 className="font-display text-5xl normal-case leading-none tracking-tight text-foreground md:text-7xl">
+              Siti su misura.
+              <br />
+              <span className="font-normal italic text-muted-foreground">Un cliente</span> alla volta.
+            </h1>
+            <p className="max-w-2xl font-sans text-lg leading-relaxed text-muted-foreground">
+              Progetto, sviluppo e metto online il sito della tua attività — poi resto io a occuparmi di
+              manutenzione e aggiornamenti. Niente template, nessun passaggio di mano: dall'idea al codice
+              in produzione segui sempre e solo me.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+            className="flex flex-col gap-4 rounded-xl bg-surface-container-low p-6 lg:col-span-4"
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">Modello</span>
+              <span className="font-mono text-xs text-accent">1 cliente alla volta</span>
+            </div>
+            <p className="font-sans text-sm text-muted-foreground">
+              Nessuna delega, nessuna riunione superflua: tutta la mia attenzione è su un solo progetto per
+              volta, dalla prima bozza al lancio.
+            </p>
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center">
+              <a
+                href="#lavori"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 font-mono text-[11px] uppercase tracking-wider font-semibold text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              >
+                Guarda i lavori
+              </a>
+              <a
+                href={whatsappLink("Ciao Gianluca, vorrei informazioni per il mio nuovo sito web")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-surface-container-high px-4 py-3 font-mono text-[11px] tracking-wide text-foreground transition-colors hover:bg-surface-container-highest"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                WhatsApp diretto ↗
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Quick facts strip — solo dati veri o verificabili */}
+        <div className="grid grid-cols-2 gap-3 pt-2 md:grid-cols-4">
+          <div className="flex flex-col gap-1 rounded-lg bg-surface-container-low p-4">
+            <span className="font-mono text-[10px] uppercase text-muted-foreground">Dove</span>
+            <span className="font-display text-lg text-foreground">Napoli</span>
+            <span className="font-mono text-[11px] text-subdued">Lavoro da remoto e in presenza</span>
+          </div>
+          <div className="flex flex-col gap-1 rounded-lg bg-surface-container-low p-4">
+            <span className="font-mono text-[10px] uppercase text-muted-foreground">Approccio</span>
+            <span className="font-display text-lg text-foreground">Solo codice su misura</span>
+            <span className="font-mono text-[11px] text-subdued">Zero builder, zero temi preconfezionati</span>
+          </div>
+          <div className="flex flex-col gap-1 rounded-lg bg-surface-container-low p-4">
+            <span className="font-mono text-[10px] uppercase text-muted-foreground">Accessibilità</span>
+            <span className="font-display text-lg text-accent">97/100</span>
+            <span className="font-mono text-[11px] text-subdued">Media Lighthouse sui progetti live</span>
+          </div>
+          <div className="flex flex-col gap-1 rounded-lg bg-surface-container-low p-4">
+            <span className="font-mono text-[10px] uppercase text-muted-foreground">Cosa faccio</span>
+            <span className="font-display text-lg text-foreground">Design, sviluppo, manutenzione</span>
+            <span className="font-mono text-[11px] text-subdued">Dall'idea al sito online</span>
+          </div>
+        </div>
       </div>
 
-      {/* Decorative side rail text */}
-      <div className="absolute left-10 bottom-24 hidden lg:block">
-        <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-accent/40 rotate-90 origin-left">
-          gnwebagency // aesthetics
-        </p>
-      </div>
-      
-      <div className="absolute right-10 bottom-24 hidden lg:block">
-        <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-accent/40 -rotate-90 origin-right">
-          digital craft // since 2024
-        </p>
-      </div>
-
-      {/* Hero glow effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/5 blur-[160px]" />
     </section>
   );
 };

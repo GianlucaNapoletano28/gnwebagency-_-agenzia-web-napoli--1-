@@ -2,7 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/src/components/sections/Navbar";
 import { Hero } from "@/src/components/sections/Hero";
-import { Services } from "@/src/components/sections/Services";
 import { Contact } from "@/src/components/sections/Contact";
 import { Footer } from "@/src/components/sections/Footer";
 
@@ -93,7 +92,6 @@ export const Home = () => {
       </Helmet>
       <Navbar />
       <Hero />
-      <Services />
       <Contact />
       <Footer />
     </>
