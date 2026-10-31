@@ -41,6 +41,7 @@ export interface LavoroDesignSystem {
 export interface LavoroCaseStudy {
   sfida?: string;
   approccio?: string;
+  risultato?: string;
   designSystem?: LavoroDesignSystem;
   testimonial?: LavoroTestimonial;
 }
@@ -88,7 +89,12 @@ export const LAVORI: Lavoro[] = [
     metriche: [{ label: "Accessibilità", value: "96/100" }],
     hasCaseStudy: true,
     caseStudy: {
-      // Sfida e approccio: testi da ricevere, blocchi nascosti finché assenti.
+      sfida:
+        "Terrazza Partenopea riceveva quasi tutte le prenotazioni dalle piattaforme. Serviva un sito che portasse gli ospiti a prenotare direttamente, senza intermediari e senza commissioni.",
+      approccio:
+        "Ho disegnato un sito che trasmette l'accoglienza della struttura prima ancora di arrivare: toni caldi, tipografia elegante, foto protagoniste. La prenotazione diretta su WhatsApp è sempre a portata di mano, su ogni pagina. I contenuti sono scritti e strutturati per essere capiti sia da Google sia dagli assistenti AI.",
+      risultato:
+        "Il sito ha generato tantissime richieste di prenotazione diretta. Oggi Terrazza Partenopea compare nelle risposte degli assistenti AI quando si cerca dove dormire a Napoli.",
       designSystem: {
         // Estratti dagli stili calcolati di terrazzapartenopea.it (non dal mockup Stitch).
         base: [

@@ -3,6 +3,9 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/src/components/sections/Navbar";
 import { Hero } from "@/src/components/sections/Hero";
 import { Lavori } from "@/src/components/sections/Lavori";
+import { Metodo } from "@/src/components/sections/Metodo";
+import { Manifesto } from "@/src/components/sections/Manifesto";
+import { ChiSono } from "@/src/components/sections/ChiSono";
 import { Contact } from "@/src/components/sections/Contact";
 import { Footer } from "@/src/components/sections/Footer";
 
@@ -94,6 +97,9 @@ export const Home = () => {
       <Navbar />
       <Hero />
       <Lavori />
+      <Metodo />
+      <Manifesto />
+      <ChiSono />
       <Contact />
       <Footer />
     </>

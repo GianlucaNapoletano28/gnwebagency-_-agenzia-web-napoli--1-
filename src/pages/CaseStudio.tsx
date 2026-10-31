@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Navigate, useParams } from "react-router-dom";
 import { Navbar } from "@/src/components/sections/Navbar";
 import { Footer } from "@/src/components/sections/Footer";
-import { LAVORI } from "@/src/data/lavori";
+import { LAVORI, type Lavoro } from "@/src/data/lavori";
 
 const domainOf = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
@@ -21,8 +21,19 @@ export const CaseStudio = () => {
 
   const { caseStudy } = lavoro;
   const ds = caseStudy.designSystem;
+
+  // Prossimo lavoro CON case study (circolare); null se non ce n'è un altro.
   const currentIndex = LAVORI.findIndex((l) => l.slug === lavoro.slug);
-  const next = LAVORI[(currentIndex + 1) % LAVORI.length];
+  let next: Lavoro | null = null;
+  for (let i = 1; i <= LAVORI.length; i++) {
+    const candidate = LAVORI[(currentIndex + i) % LAVORI.length];
+    if (candidate.slug === lavoro.slug) break;
+    if (candidate.hasCaseStudy) {
+      next = candidate;
+      break;
+    }
+  }
+
   const ogImage = `https://gnwebagency.com${lavoro.immagine}`;
   const pageUrl = `https://gnwebagency.com/lavori/${lavoro.slug}`;
 
@@ -173,6 +184,15 @@ export const CaseStudio = () => {
                 </div>
               )}
 
+              {caseStudy.risultato && (
+                <div className="flex flex-col gap-3">
+                  <span className="font-mono text-xs text-accent">03 / Risultato</span>
+                  <p className="font-sans text-base leading-relaxed text-muted-foreground">
+                    {caseStudy.risultato}
+                  </p>
+                </div>
+              )}
+
               {lavoro.metriche && lavoro.metriche.length > 0 && (
                 <div className="flex flex-wrap gap-6 rounded-lg bg-surface-container-low p-5">
                   {lavoro.metriche.map((metrica) => (
@@ -292,18 +312,16 @@ export const CaseStudio = () => {
             </div>
           )}
 
-          {/* Prossimo lavoro */}
+          {/* Prossimo lavoro con case study, o torna a tutti i lavori */}
           <a
-            href={next.hasCaseStudy ? `/lavori/${next.slug}` : next.url}
-            target={next.hasCaseStudy ? undefined : "_blank"}
-            rel={next.hasCaseStudy ? undefined : "noopener noreferrer"}
+            href={next ? `/lavori/${next.slug}` : "/#lavori"}
             className="group flex flex-col gap-1 rounded-xl bg-surface-container-low p-6 transition-colors hover:bg-surface-container md:flex-row md:items-center md:justify-between"
           >
             <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
               Prossimo lavoro
             </span>
             <span className="font-display text-xl normal-case text-foreground transition-colors group-hover:text-accent">
-              {next.titolo} →
+              {next ? next.titolo : "Tutti i lavori"} →
             </span>
           </a>
         </div>
