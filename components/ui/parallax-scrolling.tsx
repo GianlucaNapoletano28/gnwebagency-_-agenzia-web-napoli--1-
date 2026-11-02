@@ -119,7 +119,7 @@ export const ParallaxScrolling = () => {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div data-parallax-layer="3" className="absolute inset-0 flex items-center justify-center px-4">
-          <span className="select-none whitespace-nowrap font-display font-semibold uppercase leading-none tracking-tighter text-foreground text-[14vw] md:text-[9vw]">
+          <span className="select-none whitespace-nowrap font-display font-bold uppercase leading-none tracking-tighter text-foreground text-[14vw] md:text-[9vw]">
             GNWEBAGENCY
           </span>
         </div>

@@ -99,7 +99,7 @@ export const HeroParallax = () => {
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center px-4"
           >
-            <span className="select-none whitespace-nowrap font-display font-semibold uppercase leading-none tracking-tighter text-foreground text-[16vw] md:text-[12vw]">
+            <span className="select-none whitespace-nowrap font-display font-bold uppercase leading-none tracking-tighter text-foreground text-[16vw] md:text-[12vw]">
               GN<span className="text-accent">WEB</span>AGENCY
             </span>
           </motion.div>

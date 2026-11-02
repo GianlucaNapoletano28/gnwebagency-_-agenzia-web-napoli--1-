@@ -117,6 +117,27 @@ disegna e sviluppa siti su misura, un cliente alla volta.
     gsap/Lenis e layer propri (screenshot dei lavori, non le montagne);
     nessuna relazione di codice con questo step.
 
+- **Font display: Space Grotesk → Quantico (fuori sequenza, dopo l'hero
+  parallax)** — `--font-display` in `src/index.css` e link Google Fonts in
+  `index.html` aggiornati; Space Grotesk non più caricato (nessun altro
+  riferimento in `src/`/`components/`, solo nei mockup Stitch in `design/`,
+  non toccati). Quantico caricato solo pesi 400/700, niente italic.
+  - `font-semibold` (600, peso non incluso) sul titolo "GNWEBAGENCY" del
+    parallax sostituito con `font-bold` (700) in entrambi i punti dove
+    compare (`components/ui/parallax-scrolling.tsx`, Home reale, e
+    `src/components/sections/HeroParallax.tsx`, prova isolata su
+    `/lab/hero`) per evitare il grassetto finto del browser.
+  - Font del cliente nel design system del case study (Cormorant Garamond /
+    Plus Jakarta Sans di Terrazza Partenopea) non toccato: resta caricato
+    via Helmet solo in quella pagina, fuori da `--font-display`.
+  - Verifica visiva reale a 1440 e 375px (quest'ultima tramite iframe
+    `contentWindow` da 375px iniettato nella pagina, perché la finestra
+    Chrome in questo ambiente non scende sotto ~500px — vedi nota nello
+    step Hero parallax): nessun overflow su H1, titolo GNWEBAGENCY, card
+    lavori/case study, numeri Metodo, menu mobile; accenti italiani (à è é
+    ì ò ù) leggibili.
+  - `tsc --noEmit` e `npm run build` senza errori.
+
 ## Step rimanenti
 
 ### S8 — Pulizia testi e SEO (proposta fatta in chat, non ancora applicata)
