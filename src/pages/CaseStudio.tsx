@@ -48,7 +48,7 @@ export const CaseStudio = () => {
   return (
     <>
       <Helmet>
-        <title>{lavoro.titolo} — Case Study | GN Web Agency</title>
+        <title>{`${lavoro.titolo} — Case Study | GN Web Agency`}</title>
         <meta
           name="description"
           content={`Case study ${lavoro.titolo}: ${lavoro.settore}, progetto ${lavoro.anno}. Design, sviluppo e risultati tecnici misurati.`}

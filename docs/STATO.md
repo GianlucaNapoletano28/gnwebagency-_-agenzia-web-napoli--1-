@@ -138,6 +138,13 @@ disegna e sviluppa siti su misura, un cliente alla volta.
     ì ò ù) leggibili.
   - `tsc --noEmit` e `npm run build` senza errori.
 
+- **Prerender e 404 (fuori sequenza, 22/11/2026, fatto da Jarvis su richiesta di Gianluca)** — prima il sito serviva `<div id="root"></div>` vuoto: niente testo né H1 per Google e crawler AI, e `/faq`, `/privacy`, `/cookies` aperte direttamente rispondevano 404 (nessun redirect su Netlify).
+  - `scripts/prerender.mjs`: dopo `vite build` apre ogni pagina in Chrome (headless, reduced motion) con `playwright-core` e salva l'HTML disegnato in `dist/` (`/`, `/faq`, `/privacy`, `/cookies`, `/lavori/terrazza-partenopea`, `404.html`). Tiene una sola copia di title, meta e canonical (React 19 porta nell'head i tag di Helmet accanto a quelli di `index.html`). Fallisce se una pagina esce senza H1. `npm run build` lo esegue da solo; usa Google Chrome installato sul Mac.
+  - `src/pages/NotFound.tsx` + rotta `*` (noindex): Netlify serve `dist/404.html` con stato 404 vero.
+  - `CaseStudio.tsx`: il `<title>` era vuoto (React 19 vuole una sola stringa come figlio): ora è un template string.
+  - Verifica: `tsc --noEmit` e build ok; HTML di ogni pagina con H1, un title, una description, un canonical; home a 390 e 1440 px uguale al sito live, con e senza JS; nessun errore in console.
+  - **Da sistemare in S8 (in attesa di Gianluca):** title e description della home dicono ancora "da €299" e la FAQ parla di prezzi; con il prerender ora lo leggono anche i crawler AI.
+
 ## Step rimanenti
 
 ### S8 — Pulizia testi e SEO (proposta fatta in chat, non ancora applicata)
