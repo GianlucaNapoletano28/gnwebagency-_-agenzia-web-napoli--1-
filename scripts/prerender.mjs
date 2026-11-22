@@ -11,12 +11,14 @@ import { fileURLToPath } from "url";
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = resolve(rootDir, "dist");
 
+// Pagine interne come file .html (non cartelle): Netlify le serve su /faq con 200,
+// senza il 301 verso /faq/ (canonical e sitemap sono senza barra finale).
 // "/" per ultima: finché non è sovrascritta, il fallback del server resta l'index.html di Vite.
 const ROUTES = [
-  { path: "/faq", out: "faq/index.html" },
-  { path: "/privacy", out: "privacy/index.html" },
-  { path: "/cookies", out: "cookies/index.html" },
-  { path: "/lavori/terrazza-partenopea", out: "lavori/terrazza-partenopea/index.html" },
+  { path: "/faq", out: "faq.html" },
+  { path: "/privacy", out: "privacy.html" },
+  { path: "/cookies", out: "cookies.html" },
+  { path: "/lavori/terrazza-partenopea", out: "lavori/terrazza-partenopea.html" },
   { path: "/pagina-non-esistente", out: "404.html" },
   { path: "/", out: "index.html" },
 ];
