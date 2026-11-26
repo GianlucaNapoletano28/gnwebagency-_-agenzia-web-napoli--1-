@@ -12,19 +12,19 @@ const categories = [
     items: [
       {
         question: "Quanto costa un sito web con GnWebAgency?",
-        answer: "I nostri prezzi partono da €299 per soluzioni entry-level. Il costo finale dipende dalla complessità del progetto: numero di pagine, funzionalità specifiche (come prenotazioni o e-commerce), livello di personalizzazione del design e integrazioni esterne. Offriamo preventivi trasparenti e personalizzati per adattarci al budget di ogni piccola attività a Napoli e in Italia."
+        answer: "La landing page parte da 350€ ed è pronta in 7 giorni. Il costo finale dipende dalla complessità del progetto: numero di pagine, funzionalità specifiche (come prenotazioni o e-commerce), livello di personalizzazione del design e integrazioni esterne. Offriamo preventivi trasparenti e personalizzati per adattarci al budget di ogni piccola attività a Napoli e in Italia."
       },
       {
         question: "Quanto tempo serve per creare un sito web?",
-        answer: "Per un sito vetrina professionale, i tempi medi di consegna sono di circa 1-2 settimane. Se il progetto richiede funzionalità e-commerce o sviluppi custom più complessi, la tempistica può variare tra le 3 e le 4 settimane. La rapidità dipende anche dalla velocità con cui il cliente fornisce i materiali necessari."
+        answer: "Una landing page è pronta in 7 giorni. Per un sito vetrina professionale, i tempi medi di consegna sono di circa 1-2 settimane. Se il progetto richiede funzionalità e-commerce o sviluppi custom più complessi, la tempistica può variare tra le 3 e le 4 settimane. La rapidità dipende anche dalla velocità con cui il cliente fornisce i materiali necessari."
       },
       {
         question: "Cosa include il vostro servizio base?",
-        answer: "Il nostro pacchetto base da €299 include: design moderno, sviluppo tecnico, registrazione dominio (1° anno), configurazione hosting, SEO on-page, ottimizzazione mobile responsive e collegamento social. È la soluzione ideale per professionisti e piccoli negozi."
+        answer: "La landing page da 350€ include: design moderno, sviluppo tecnico, registrazione dominio (1° anno), configurazione hosting, SEO on-page, ottimizzazione mobile responsive e collegamento social. È la soluzione ideale per professionisti e piccoli negozi."
       },
       {
         question: "Si può pagare a rate?",
-        answer: "Attualmente, per mantenere i nostri prezzi di partenza estremamente competitivi (da €299), non offriamo la possibilità di pagamento rateizzato. Il pagamento è diviso in due tranche: acconto per l'avvio e saldo alla consegna."
+        answer: "Attualmente, per mantenere i nostri prezzi di partenza estremamente competitivi (da 350€), non offriamo la possibilità di pagamento rateizzato. Il pagamento è diviso in due tranche: acconto per l'avvio e saldo alla consegna."
       },
       {
         question: "Quanto costa il dominio e l'hosting?",

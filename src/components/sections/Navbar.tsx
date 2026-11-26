@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { AVAILABILITY, BRAND_NAME } from "@/lib/constants";
+import { AVAILABILITY, BRAND_NAME, whatsappLink } from "@/lib/constants";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,10 +65,12 @@ export const Navbar = () => {
           </div>
 
           <a
-            href="/#contatti"
-            className="hidden sm:inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 font-mono text-[11px] uppercase tracking-wider font-medium text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            href={whatsappLink("Ciao Gianluca, vorrei informazioni sulla landing in 7 giorni da 350€")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2 font-mono text-[11px] uppercase tracking-wider font-semibold text-accent-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
           >
-            Parliamo
+            WhatsApp
           </a>
 
           {/* Mobile Menu Toggle */}

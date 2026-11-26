@@ -72,14 +72,14 @@ export const Home = () => {
   return (
     <>
       <Helmet>
-        <title>GnWebAgency | Web Agency Napoli - Siti Web Professionali da €299</title>
-        <meta name="description" content="Siamo la web agency di Napoli specializzata in creazione siti web professionali per piccole attività. SEO inclusa, design moderno e prezzi da €299. Inizia ora!" />
+        <title>GN Web Agency | Landing page in 7 giorni da 350€ - Napoli</title>
+        <meta name="description" content="Il tuo sito non ti porta clienti? Landing page pronta in 7 giorni da 350€ per ristoranti e attività locali. Napoli. Scrivimi su WhatsApp." />
         <link rel="canonical" href="https://gnwebagency.com" />
         
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://gnwebagency.com" />
-        <meta property="og:title" content="GnWebAgency | Web Agency Napoli - Siti Web da €299" />
+        <meta property="og:title" content="GN Web Agency | Landing page in 7 giorni da 350€" />
         <meta property="og:description" content="Creiamo siti web moderni e minimalisti per piccole attività a Napoli e in tutta Italia. SEO inclusa, design responsive. Richiedi un preventivo." />
         <meta property="og:image" content="https://gnwebagency.com/og-image.png" />
         <meta property="og:locale" content="it_IT" />
@@ -88,7 +88,7 @@ export const Home = () => {
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="GnWebAgency | Web Agency Napoli" />
-        <meta name="twitter:description" content="Creazione siti web professionali per piccole attività a Napoli e in Italia. Da €299." />
+        <meta name="twitter:description" content="Landing page pronta in 7 giorni da 350€ per ristoranti e attività locali." />
         <meta name="twitter:image" content="https://gnwebagency.com/og-image.png" />
 
         <script type="application/ld+json">

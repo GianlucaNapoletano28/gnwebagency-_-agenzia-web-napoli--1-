@@ -35,14 +35,13 @@ export const Hero = () => {
             className="flex flex-col gap-6 lg:col-span-8"
           >
             <h1 className="font-display text-5xl normal-case leading-none tracking-tight text-foreground md:text-7xl">
-              Siti su misura.
+              Il tuo sito non ti porta clienti?
               <br />
-              <span className="font-normal italic text-muted-foreground">Un cliente</span> alla volta.
+              <span className="font-normal italic text-muted-foreground">Landing in 7 giorni</span> da 350€.
             </h1>
             <p className="max-w-2xl font-sans text-lg leading-relaxed text-muted-foreground">
-              Progetto, sviluppo e metto online il sito della tua attività — poi resto io a occuparmi di
-              manutenzione e aggiornamenti. Niente template, nessun passaggio di mano: dall'idea al codice
-              in produzione segui sempre e solo me.
+              Per ristoranti e attività locali: una landing page su misura, pronta in 7 giorni, fatta per
+              farti contattare. Niente template, nessun passaggio di mano: segui sempre e solo me.
             </p>
           </motion.div>
 
@@ -62,19 +61,18 @@ export const Hero = () => {
             </p>
             <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center">
               <a
-                href="#lavori"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 font-mono text-[11px] uppercase tracking-wider font-semibold text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-              >
-                Guarda i lavori
-              </a>
-              <a
-                href={whatsappLink("Ciao Gianluca, vorrei informazioni per il mio nuovo sito web")}
+                href={whatsappLink("Ciao Gianluca, vorrei informazioni sulla landing in 7 giorni da 350€")}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-mono text-[11px] uppercase tracking-wider font-semibold text-accent-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                Scrivimi su WhatsApp ↗
+              </a>
+              <a
+                href="#lavori"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-surface-container-high px-4 py-3 font-mono text-[11px] tracking-wide text-foreground transition-colors hover:bg-surface-container-highest"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                WhatsApp diretto ↗
+                Guarda i lavori
               </a>
             </div>
           </motion.div>
