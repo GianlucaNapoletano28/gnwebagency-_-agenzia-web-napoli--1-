@@ -1,9 +1,27 @@
+import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { LAVORI } from "@/src/data/lavori";
 
 const domainOf = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 export const Lavori = () => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [current, setCurrent] = useState(0);
+
+  const onCarouselScroll = () => {
+    const el = carouselRef.current;
+    const first = el?.firstElementChild as HTMLElement | null;
+    if (!el || !first) return;
+    const step = first.offsetWidth + 16; // larghezza card + gap-4
+    setCurrent(Math.min(LAVORI.length - 1, Math.max(0, Math.round(el.scrollLeft / step))));
+  };
+
+  const goTo = (i: number) => {
+    const el = carouselRef.current;
+    const card = el?.children[i] as HTMLElement | undefined;
+    if (el && card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  };
+
   return (
     <section id="lavori" className="w-full bg-surface-container-lowest px-6 py-20 md:px-12 md:py-28">
       <div className="mx-auto flex max-w-7xl flex-col gap-16">
@@ -25,7 +43,60 @@ export const Lavori = () => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-10">
+        {/* Telefono: carosello orizzontale, una card per volta */}
+        <div className="-mx-6 flex flex-col gap-5 md:hidden">
+          <div
+            ref={carouselRef}
+            onScroll={onCarouselScroll}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            aria-label="Lavori, scorri per vederli tutti"
+          >
+            {LAVORI.map((lavoro) => (
+              <article
+                key={lavoro.slug}
+                className="flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-xl bg-surface-container-low shadow-xl"
+              >
+                <img
+                  src={lavoro.immagine}
+                  alt={`Anteprima del sito ${lavoro.titolo}`}
+                  loading="lazy"
+                  className="h-[200px] w-full object-cover object-top"
+                />
+                <div className="flex flex-1 flex-col gap-3 p-5">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                    {lavoro.settore}
+                  </span>
+                  <h3 className="font-display text-xl normal-case tracking-tight text-foreground">{lavoro.titolo}</h3>
+                  <p className="font-sans text-sm text-muted-foreground">{lavoro.servizi.join(" · ")}</p>
+                  <a
+                    href={lavoro.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 font-mono text-[11px] uppercase tracking-wider font-semibold text-accent-foreground"
+                  >
+                    Vedi il sito <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="flex items-center justify-center gap-3 px-6">
+            {LAVORI.map((lavoro, i) => (
+              <button
+                key={lavoro.slug}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Vai a ${lavoro.titolo}`}
+                className={`h-2 rounded-full transition-all ${i === current ? "w-6 bg-accent" : "w-2 bg-surface-container-highest"}`}
+              />
+            ))}
+            <span className="font-mono text-[11px] text-muted-foreground">
+              {current + 1}/{LAVORI.length}
+            </span>
+          </div>
+        </div>
+
+        <div className="hidden flex-col gap-10 md:flex">
           {LAVORI.map((lavoro, index) => (
             <motion.article
               key={lavoro.slug}
