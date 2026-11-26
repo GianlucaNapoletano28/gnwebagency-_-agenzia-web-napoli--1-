@@ -29,10 +29,10 @@ export const CookieBanner = () => {
           <div className="max-w-4xl mx-auto bg-black border border-white/10 p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-sm text-gray-400 font-mono">
               <p>
-                Questo sito utilizza solo cookie tecnici necessari al funzionamento. 
-                Nessun dato viene raccolto o tracciato. Leggi la nostra{" "}
+                Questo sito non usa cookie di profilazione né strumenti di tracciamento.
+                I dati che mi invii (modulo, WhatsApp, email) li uso solo per risponderti.{" "}
                 <Link to="/privacy" className="text-[#00ff88] hover:underline">
-                  Privacy Policy
+                  Informativa privacy
                 </Link>.
               </p>
             </div>
